@@ -91,19 +91,13 @@ public class Main {
     }
 
     public static boolean isAlternating(int[] seq, int index) {
-        boolean pos = seq[index] > 0;
-
-        for (int i = index + 1; i < seq.length; i++) {
-            pos = !pos;
-            if (pos) {
-                if (seq[i] < 0) {
-                    return false;
-                }
-            } else if (seq[i] > 0) {
-                return false;
-            }
+        if (index + 1 >= seq.length) {
+            return true;
         }
 
-        return true;
+        boolean isPos = seq[index] > 0;
+        boolean nextIsPos = seq[index + 1] > 0;
+
+        return isPos == !nextIsPos && isAlternating(seq, index + 1);
     }
 }
